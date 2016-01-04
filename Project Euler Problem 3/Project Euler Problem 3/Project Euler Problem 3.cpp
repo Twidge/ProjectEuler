@@ -4,9 +4,7 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include <cstdint>
-#include <limits>
-#include <cmath>
+#include <C:/Users/Matthew/Documents/GitHub/ProjectEuler/CommonFunctions.h>
 
 const uint64_t G_NUMBER_TO_CHECK = 600851475143;
 
@@ -34,21 +32,3 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 }
-
-bool IsPrime(uint64_t number)
-{
-	bool t_isPrime = true;
-	uint64_t largestPossibleDivisor = static_cast<uint64_t>(sqrt(static_cast<double>(number)));
-
-	for (uint64_t divisorToCheck = 2; divisorToCheck < largestPossibleDivisor; divisorToCheck++)
-	{
-		if (number % divisorToCheck == 0)
-		{
-			t_isPrime = false;
-			break;
-		}
-	}
-
-	return t_isPrime;
-}
-
