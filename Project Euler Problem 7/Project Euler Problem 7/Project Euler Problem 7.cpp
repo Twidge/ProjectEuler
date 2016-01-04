@@ -15,15 +15,15 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// For each number, check if it is prime - stop when we have found the desired amount.
 
-	for (uint64_t t_nextNumber = 2; t_nextNumber < UINT64_MAX; t_nextNumber++)
+	for (uint64_t l_nextNumber = 2; l_nextNumber < UINT64_MAX; l_nextNumber++)
 	{
-		if (IsPrime(t_nextNumber))
+		if (IsPrime(l_nextNumber))
 		{
 			t_primeCounter++;
 
 			if (t_primeCounter == G_NTH_PRIME)
 			{
-				t_result = t_nextNumber;
+				t_result = l_nextNumber;
 				break;
 			}
 		}
