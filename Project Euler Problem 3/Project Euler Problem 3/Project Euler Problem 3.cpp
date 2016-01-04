@@ -1,5 +1,6 @@
-// Project Euler Problem 3.cpp : Defines the entry point for the console application.
+// Project Euler Problem 3.cpp
 //
+// Find the largest prime that divides 600851475143
 
 #include "stdafx.h"
 #include <iostream>
