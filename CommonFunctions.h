@@ -43,12 +43,20 @@ bool IsPrime(uint64_t number)
 	bool t_isPrime = true;
 	uint64_t largestPossibleDivisor = static_cast<uint64_t>(sqrt(static_cast<double>(number)));
 
-	for (uint64_t divisorToCheck = 2; divisorToCheck <= largestPossibleDivisor; divisorToCheck++)
+	if (number == 0 || number == 1)
 	{
-		if (number % divisorToCheck == 0)
+		t_isPrime = false;
+	}
+
+	else
+	{
+		for (uint64_t divisorToCheck = 2; divisorToCheck <= largestPossibleDivisor; divisorToCheck++)
 		{
-			t_isPrime = false;
-			break;
+			if (number % divisorToCheck == 0)
+			{
+				t_isPrime = false;
+				break;
+			}
 		}
 	}
 
