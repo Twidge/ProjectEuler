@@ -24,6 +24,9 @@ bool AreCoprime(unsigned int, unsigned int);
 // Takes a number and produces the next number in the Collatz sequence
 inline unsigned int Collatz(unsigned int n) { return (n % 2 == 0 ? (n / 2) : (3 * n) + 1); }
 
+// Combinations: returns the number of ways of choosing k elements from a set of n elements without repeats
+uint64_t Combinations(double parentSetSize, double subsetSize);
+
 // Finds all divisors of a number
 std::list<unsigned int> FindAllDivisorsAsList(unsigned int);
 std::list<uint64_t> FindAllDivisorsAsList(uint64_t);
@@ -88,6 +91,21 @@ bool AreCoprime(unsigned int firstNumber, unsigned int secondNumber)
 	}
 
 	return t_areCoprime;
+}
+
+// Combinations: returns the number of ways of choosing k elements from a set of n elements without repeats
+uint64_t Combinations(double parentSetSize, double subsetSize)
+{
+	double t_result = 1;
+
+	// Rather than calculating the factorials directly, which is infeasible, this uses the multiplicative formula
+
+	for (double l_nextNumber = 1; l_nextNumber <= subsetSize; l_nextNumber++)
+	{
+		t_result *= ((parentSetSize + 1 - l_nextNumber) / l_nextNumber);
+	}
+
+	return static_cast<uint64_t>(t_result);
 }
 
 // Finds all divisors of a number, returns a list
