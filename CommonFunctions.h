@@ -49,6 +49,9 @@ bool IsPrime(uint64_t);
 // Checks if three numbers form a Pythagorean triplet
 bool IsPythagoreanTriple(uint64_t, uint64_t, uint64_t);
 
+// Computes very large powers of two and returns the result as a vector of digits (suitable for eg. summing those digits)
+std::vector<short> LargePowerOfTwo(unsigned int);
+
 // Ramanujan divisor function - finds the number of divisors of an integer
 unsigned int RamanujanDivisorFunction(int);
 
@@ -326,6 +329,72 @@ bool IsPythagoreanTriple(uint64_t firstNumber, uint64_t secondNumber, uint64_t t
 	}
 
 	return t_isTriplet;
+}
+
+// Computes very large powers of two and returns the result as a vector of digits (suitable for eg. summing those digits)
+std::vector<short> LargePowerOfTwo(unsigned int power)
+{
+	// Create a vector of digits - this will actually represent the number backwards and we'll reverse it at the end of the function
+	// (Reversing it isn't strictly necessary for Problem 16, which this was designed for, but we'll do it anyway)
+
+	std::vector<short> t_digits = std::vector<short> {1};
+
+	// Carry out the appropriate number of multiplications by 2
+
+	for (unsigned int l_nextProduct = 1; l_nextProduct <= power; l_nextProduct++)
+	{
+		// Multiply all digits by 2
+
+		for (unsigned int l_nextDigit = 0; l_nextDigit < t_digits.size(); l_nextDigit++)
+		{
+			t_digits[l_nextDigit] *= 2;
+		}
+
+		// If any of the digits are greater than or equal to 10, carry the 1
+
+		for (unsigned int l_nextDigit = 0; l_nextDigit < t_digits.size(); l_nextDigit++)
+		{
+			if (t_digits[l_nextDigit] >= 10 && l_nextDigit == t_digits.size() - 1)
+			{
+				t_digits.push_back(1);
+				t_digits[l_nextDigit] -= 10;
+			}
+
+			else if (t_digits[l_nextDigit] >= 10)
+			{
+				(t_digits[l_nextDigit + 1])++;
+				t_digits[l_nextDigit] -= 10;
+			}
+		}
+	}
+
+	// Reverse the vector in-place
+	
+	if (t_digits.size() % 2 == 0)
+	{
+		for (unsigned int l_nextIndex = 0; l_nextIndex < t_digits.size() / 2; l_nextIndex++)
+		{
+			// Swap t_digits[l_nextIndex] and t_digits[t_digits.size() - 1 - l_nextIndex] in place
+
+			t_digits[l_nextIndex] += t_digits[t_digits.size() - 1 - l_nextIndex];
+			t_digits[t_digits.size() - 1 - l_nextIndex] = t_digits[l_nextIndex] - t_digits[t_digits.size() - 1 - l_nextIndex];
+			t_digits[l_nextIndex] -= t_digits[t_digits.size() - 1 - l_nextIndex];
+		}
+	}
+
+	else
+	{
+		for (unsigned int l_nextIndex = 0; l_nextIndex < (t_digits.size() - 1) / 2; l_nextIndex++)
+		{
+			// Swap t_digits[l_nextIndex] and t_digits[t_digits.size() - 1 - l_nextIndex] in place
+
+			t_digits[l_nextIndex] += t_digits[t_digits.size() - 1 - l_nextIndex];
+			t_digits[t_digits.size() - 1 - l_nextIndex] = t_digits[l_nextIndex] - t_digits[t_digits.size() - 1 - l_nextIndex];
+			t_digits[l_nextIndex] -= t_digits[t_digits.size() - 1 - l_nextIndex];
+		}
+	}
+
+	return t_digits;
 }
 
 // Ramanujan divisor function - finds the number of divisors of an integer
