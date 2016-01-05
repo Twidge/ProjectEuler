@@ -21,6 +21,9 @@ const double G_PI = 3.14159265358979323846;
 // Checks if two numbers are coprime
 bool AreCoprime(unsigned int, unsigned int);
 
+// Takes a number and produces the next number in the Collatz sequence
+inline unsigned int Collatz(unsigned int n) { return (n % 2 == 0 ? (n / 2) : (3 * n) + 1); }
+
 // Finds all divisors of a number
 std::list<unsigned int> FindAllDivisorsAsList(unsigned int);
 std::list<uint64_t> FindAllDivisorsAsList(uint64_t);
